@@ -1,2 +1,2 @@
-# python_learn-img
+# python_learn
 learning python
