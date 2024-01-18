@@ -15,7 +15,7 @@
 string = input('Please input your string ')     # 在input里的字符串会随着语句一起输出
 
 # 在python中，用print( )进行输出
-print(string)
+print(string, end=' ')                          # 若在print内加入end=，此次输出后将不会换行
 ```
 
 
@@ -51,6 +51,10 @@ h
 o
 n
 """
+
+#可利用zip()对多个序列并行迭代
+for (name,age,job) in zip(names,ages,jobs):
+    print("{0}-{1}-{2}".format(name,age,job))
 ```
 
 ######     	2）while循环
@@ -149,7 +153,7 @@ if Ture:
 |    complex(x,y)    | 一个带有实部 x 和虚部 y 的复数，y 默认为 0 |
 | x ** y 或 pow(x,y) |                x 的 y 次幂                 |
 
-![1705500688749](C:\Users\24468\Desktop\python\python_learn-img\Python笔记\1705500688749.png)
+
 
 
 
@@ -161,7 +165,7 @@ if Ture:
 
 > 格式化输出如下：
 
-
+![](C:\Users\24468\Desktop\python\python_learn-img\Python笔记\202401172149628.png)
 
 
 
@@ -271,6 +275,8 @@ dict1.values()
 
 ```python
 l = [1024, 0.5, 'Python']
+
+# 使用list()函数可将表达式转化为列表
 ```
 ######     	2）列表的访问
 
@@ -405,6 +411,159 @@ set1.clear()            #清空集合中所有元素
 
 
 
+
+## 1/18学习
+
+### 四、 推导式
+
+######     1）列表推导式：
+
+```python
+a = [x*2 for x in range(1,5) if x%2==0]   #将符合条件的元素生成入列表a中
+# a = [2, 4, 6, 8]
+```
+
+######     2）字典推导式：
+
+```python
+my_text = 'i love you,i love mark,i love zidain'
+text_count = {c:my_text.count(c) for c in my_text}
+# 将my_text中的每一个字符统计数量并构成一个字典
+```
+
+###### 	3）集合推导式：（与列表推导式类似）
+
+```python
+a = {x*2 for x in range(1,5) if x%2==0}   #将符合条件的元素生成入列表a中
+# a = {6, 8, 2, 4}                        #集合是无序的
+```
+
+###### 	4）生成器推导式：(不直接生成元组)
+
+```python
+a = (x for x in range(1,10) if x%2==0)
+# <generator object <genexpr> at 0x000001EB9EC0D700>  --->生成器的表达式
+for x in a:
+    print(x， end=' ')
+```
+
+
+
+
+
+### 五、 错误和异常捕获
+
+##### 	try/except：
+
+```python
+while True:
+    try:
+        user_weight = float(input("请输入您的体重(单位：kg):"))
+    except ValueError:
+        print("输入为不合理数字，请重新输入")
+        continue
+    else:
+        print("您的体重为%.2fkg" % user_weight)
+        exit()
+```
+
+
+
+
+
+### 六、 基本函数的使用
+
+|         函数名         |                        用法                         |
+| :--------------------: | :-------------------------------------------------: |
+|   map(函数名，列表)    |  将列表中的所有元素代入到函数中加工，并返回生成器   |
+| lambda 参数:操作(参数) | 匿名函数(lambda它只是一个表达式，而def则是一个语句) |
+|  filter(函数名，参数)  | 过滤函数，与map作用类似，函数名的函数返回值要是T/F  |
+
+
+
+
+
+### 七、 面向对象（从宏观上把握，从整体上分析）
+
+##### 1. 类与实例化（用class定义类，类似与结构体）
+
+```python
+class Cat:  # 这是一只猫
+    name = "Amy"
+    age = "age"
+
+    """
+    在__init__方法内部使用self.属性名 = 属性的初始值就可以定义属性
+    在定义属性之后，再使用Cat类创建对象，都会拥有该属性。
+    """
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        
+    """
+    如果在开发中使用print输出变量时，希望打印自定义内容
+    就可以利用 __str__这个内置方法
+    """
+    def __str__(self):
+        return "我是小猫[%s]" % self.name
+
+    def eat(self):
+        print("%s岁的%s爱吃饭" % (self.age, self.name))
+
+    def sleep(self):
+        print("%s爱睡觉" % self.name)
+
+tom = Cat("Tom", "2")                        # 实例--->类属性与实例属性相同时，实例属性优先
+tom.name = "Tom"                             # 赋予实例属性--->理解为字典
+tom.eat()
+tom.sleep()
+print(tom)                                   #输出函数__str__内的内容
+print(Cat.name)
+print(Cat.age)
+
+
+输出结果：
+>>>2岁的Tom爱吃饭
+>>>Tom爱睡觉
+>>>我是小猫[Tom]
+>>>Amy
+>>>age
+```
+
+##### 2. 私有属性和私有方法
+
+​	在实际开发中，对象的某些属性或方法可能只希望在对象的内部被使用，而不希望在外部访问到
+
+1. ###### **私有属性**就是对象不希望公开属性
+
+2. ###### **私有方法**就是对象不希望公开方法
+
+> **定义方法**： 在定义属性或方法时，在属性名或方法名前增加两个下划线，定义就是私有属性或方法
+
+##### 3. 面向对象的三大特性（封装、继承、多态）
+
+- **封装：**根据职责将属性和方法封装到一个抽象的类中（私有化）
+
+- **继承：**实现代码的重用 相同的代码不需要重复的编写
+
+###### 1）**继承的概念**：子类拥有父类的全部方法和属性
+
+###### 2）**继承的语法：**
+
+```python
+class 类名(父类名)：
+	pass
+```
+
+1. 子类继承父类，可以**直接享受**父类封装好的方法，不需要再次开发
+2. 子类中应该根据职责，封装子类**特有的**属性和方法
+3. 子类对象不能在自己的方法内部直接访问父类的**私有属性或方法**
+
+- **多态：**不同的对象调用相同的方法，产生不同的执行结果，增加代码的灵活度
+
+1. 多态可以**增加**代码的**灵活度**
+2. 以**继承**和**重写**父类方法为前提
+3. 是调用方法的技巧，**不会影响**到类的内部设计
 
 
 
