@@ -165,7 +165,7 @@ if Ture:
 
 > 格式化输出如下：
 
-![](https://cdn.jsdelivr.net/gh/Mark-Zhangbinghan/python_learn-img@main/img/202401172149628.png)
+![](C:\Users\24468\Desktop\python\python_learn-img\Python笔记\202401172149628.png)
 
 
 
