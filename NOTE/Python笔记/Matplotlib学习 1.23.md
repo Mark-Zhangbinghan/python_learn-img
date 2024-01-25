@@ -113,3 +113,62 @@ plt.show()
 
 ![](https://cdn.jsdelivr.net/gh/Mark-Zhangbinghan/python_learn-img@main/typora%E5%9B%BE%E5%BA%8A/202401232151539.png)
 
+##### 3. 坐标轴的设置
+
+```python
+fig = plt.figure(figsize=(6, 4))
+
+x = np.linspace(0,10)
+y = np.sin(x)
+plt.plot(x,y)
+
+# fonsize:字体大小
+plt.xticks(ticks=np.arange(0,11,1), fontsize=10)
+plt.yticks(ticks=[-1,0,1],  # 刻度值，刻度大小
+           labels=['min','0','max'])  # 显示的刻度标签
+
+# 坐标轴的范围
+plt.xlim(-5,5)
+plt.axis([1,2,3,4])  # [xmin, xmax, ymin, ymax]
+```
+
+| 绘图类型 | 绘图函数  |
+| -------- | --------- |
+| 散点图   | scatter() |
+| 饼图     | pie()     |
+|          |           |
+
+#### 二、 绘制散点图
+
+```python
+# np.random.rand() rand函数根据给定维度生成[0,1)之间的数据，包含0，不包含1
+# np.random.randn() randn函数返回一个或一组样本，具有标准正态分布
+# np.random.randint() 返回随机整数，范围区间为[low,high）
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 显示中文标签
+plt.rcParams['axes.unicode_minus'] = False  # 设置正常显示符号
+
+fig = plt.figure(figsize=(10, 8))
+data = np.random.randn(100, 2)
+s = np.random.randint(50, 200, size=100)
+c = np.random.randn(100)
+
+# 利用scatter建立散点图
+plt.scatter(data[:, 0], data[:, 1], s=s, c=c, alpha=0.6)
+plt.show()
+```
+
+![](https://cdn.jsdelivr.net/gh/Mark-Zhangbinghan/python_learn-img@main/typora%E5%9B%BE%E5%BA%8A/202401240942409.png)
+
+#### 三、 绘制饼图
+
+```python
+# 利用pie建立饼图
+plt.pie(x, explode=None, labels=None, colors=None, autopct=None, pctdistance=0.6, shadow=False, labeldistance=1.1, startangle=0, radius=1, counterclock=True, wedgeprops=None, textprops=None, center=0, 0, frame=False, rotatelabels=False, *, normalize=None, data=None)[source]
+```
+
+
+

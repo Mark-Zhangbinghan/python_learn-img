@@ -159,8 +159,25 @@ torch.save(mymodel.stae_dict(),'mymodel_prams.pkl')
 mymodel = torch.load('mymodel.pkl')
 ```
 
+##### 10. np.histogram直方图生成函数
+
+```python
+numpy.histogram(a, bins=10, range=None, normed=None, weights=None, density=None)
+
+			1）a:  输入图像， 必选
+			输入数据。直方图是在展平的数组上计算的。
+            
+			2）bin: int 或标量序列或 str
+			如果 bins 是一个 int，它定义给定范围内的 equal-width bins 的数量(默认为 10)，主要是将灰度值空间分为多少分进行灰度值统计
+            
+			3）range：(浮点数，浮点数)，可选
+			bin 的下限和上限范围，如果没有提供，范围很简单(a.min(), a.max()).超出范围的值将被忽略。范围的第一个元素必须小于或等于第二个元素。主要表明的是需要统计的灰度值取值范围。
+                
+			4）normed：布尔型，可选
+			5）weights： 数组，可选
+			6）density： 布尔型，可选
+			如果False，结果将包含每个 bin 中的样本数。如果True, 结果就是概率的值密度在 bin 处的函数，归一化使得不可缺少的在范围内为 1
+```
 
 
-2、如果两个数组的形状在任何一个维度都不匹配，那么数组的形状会沿着维度为1的维度扩展以匹配另外一个数组的形状。
 
-3、如果两个数组的形状在任何一个维度上都不匹配并且没有任何一个维度等于1，那么会引发异常。

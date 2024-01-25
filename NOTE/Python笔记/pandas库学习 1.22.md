@@ -16,6 +16,12 @@ datas = pd.read_csv("stu.txt")
 
 # 查看前几行数据
 datas.head()
+# 显示所有列
+pd.set_option('display.max_columns', None)
+# 显示所有行
+pd.set_option('display.max_rows', None)
+# 不换行显示
+pd.set_option('display.width', 1000)
 
 # 查看数据的形状，返回（行数、列数）
 datas.shape()
@@ -26,11 +32,17 @@ datas.shape()
 - 删除无用列
 
 ``` python
-# 运用drop函数删除对应列
+# 运用describe()函数展现统计信息
+datas.describe()
+
+# 运用drop()函数删除对应列
 datas.drop(columns="XXX", inplace = True)
 
-# 用info()函数查看数据类型
+# 运用info()函数查看数据类型
 datas.info()
+
+# 运用isnull().sum()统计空值
+datas.isnull().sum()
 
 # 运用astype()函数将数据类型进行转换
 datas['对应列'] = datas['对应列'].astype('想要的数据类型')
@@ -72,5 +84,28 @@ datas["XXX"].fillna(datas["XXX"].median(),inplace = True)
 ```python
 # 取XXX数据的前10位
 datas["XXX"] = datas["XXX"].apply(lambda x:str(x)[0:10])
+```
+
+#### 三、 数据提取
+
+```python
+# 统计XXX中的数据
+datas["XXX"].value_counts()
+```
+
+##### 1. 分组聚合
+
+```python
+# 方法一
+datas.pivot_table(index="索引值",values="想要比较的数据",aggfunc="数据比较的函数类型")
+
+# 方法二
+datas.groupby('索引值')['想要比较的数据'].count()
+```
+
+##### 2. 数据合并
+
+```python
+x = pd.merge(x,y,left_on=['以x的哪一列为合并值'],right_on=['以y的哪一列为合并值'])
 ```
 
